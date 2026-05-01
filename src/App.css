@@ -1003,3 +1003,128 @@ footer small {
     height: 56px;
   }
 }
+
+
+/* ===== Premium live background animation on homepage hero ===== */
+.hero {
+  overflow: hidden;
+}
+
+.heroAnimatedBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.heroAnimatedBg span {
+  position: absolute;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 6px;
+  background: rgba(217, 164, 65, 0.42);
+  box-shadow: 0 0 22px rgba(217, 164, 65, 0.32);
+  animation: floatStars 14s linear infinite;
+}
+
+.heroAnimatedBg span:nth-child(1) {
+  left: 8%;
+  bottom: -40px;
+  animation-delay: 0s;
+  animation-duration: 16s;
+}
+
+.heroAnimatedBg span:nth-child(2) {
+  left: 24%;
+  bottom: -40px;
+  width: 20px;
+  height: 20px;
+  animation-delay: 2s;
+  animation-duration: 18s;
+}
+
+.heroAnimatedBg span:nth-child(3) {
+  left: 48%;
+  bottom: -40px;
+  width: 11px;
+  height: 11px;
+  animation-delay: 5s;
+  animation-duration: 15s;
+}
+
+.heroAnimatedBg span:nth-child(4) {
+  left: 66%;
+  bottom: -40px;
+  width: 24px;
+  height: 24px;
+  animation-delay: 1s;
+  animation-duration: 20s;
+}
+
+.heroAnimatedBg span:nth-child(5) {
+  left: 82%;
+  bottom: -40px;
+  width: 16px;
+  height: 16px;
+  animation-delay: 4s;
+  animation-duration: 17s;
+}
+
+.heroAnimatedBg span:nth-child(6) {
+  left: 92%;
+  bottom: -40px;
+  width: 10px;
+  height: 10px;
+  animation-delay: 7s;
+  animation-duration: 19s;
+}
+
+@keyframes floatStars {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Make hero content stay above live animation */
+.heroGlass,
+.heroStats {
+  z-index: 2;
+}
+
+/* Real WhatsApp icon */
+.whatsappFloat svg {
+  width: 34px;
+  height: 34px;
+  fill: white;
+}
+
+/* Facilities with real photos */
+.facilityPhotoCard {
+  text-align: center;
+}
+
+.facilityPhotoCard img {
+  height: 150px !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+
+.facilityPhotoCard .cardIcon {
+  margin-top: 2px;
+}
+
+@media (max-width: 650px) {
+  .facilityPhotoCard img {
+    height: 190px !important;
+  }
+}

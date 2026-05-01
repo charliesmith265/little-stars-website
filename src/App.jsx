@@ -26,6 +26,12 @@ import activity2 from "./assets/activity2.jpg";
 import activity3 from "./assets/activity3.jpg";
 import activity4 from "./assets/activity4.jpg";
 
+/* Facility photos */
+import facility1 from "./assets/facility1.jpg";
+import facility2 from "./assets/facility2.jpg";
+import facility3 from "./assets/facility3.jpg";
+import facility4 from "./assets/facility4.jpg";
+
 const mainPhone = "0999743710";
 const hostelPhone = "0888532878";
 const whatsappNumber = "265999743710";
@@ -106,21 +112,25 @@ const facilities = [
     title: "Modern Classrooms",
     text: "Comfortable learning spaces designed to support active learning.",
     icon: "🏫",
+    image: facility1,
   },
   {
     title: "Nursery Section",
     text: "A friendly and safe environment for early childhood learning.",
     icon: "🧸",
+    image: facility2,
   },
   {
     title: "Boarding Facilities",
     text: "Separate boarding support for boys and girls in caring environments.",
     icon: "🛏️",
+    image: facility3,
   },
   {
     title: "School Activities",
     text: "Activities that build confidence, teamwork, discipline, and creativity.",
     icon: "🎭",
+    image: facility4,
   },
 ];
 
@@ -241,7 +251,9 @@ function App() {
         rel="noreferrer"
         aria-label="Chat on WhatsApp"
       >
-        ✆
+        <svg viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M16.04 3C8.86 3 3.02 8.83 3.02 16c0 2.3.61 4.55 1.76 6.53L3 29l6.65-1.74A12.93 12.93 0 0 0 16.04 29C23.22 29 29 23.17 29 16S23.22 3 16.04 3Zm0 23.8c-2.06 0-4.07-.55-5.84-1.6l-.42-.25-3.94 1.03 1.05-3.84-.27-.44A10.74 10.74 0 0 1 5.22 16c0-5.96 4.86-10.8 10.82-10.8 5.94 0 10.76 4.84 10.76 10.8s-4.82 10.8-10.76 10.8Zm5.92-8.08c-.33-.16-1.95-.96-2.25-1.07-.3-.11-.52-.16-.74.16-.22.33-.85 1.07-1.04 1.29-.19.22-.38.25-.71.08-.33-.16-1.38-.51-2.63-1.62-.97-.86-1.63-1.93-1.82-2.26-.19-.33-.02-.51.14-.67.14-.14.33-.38.49-.57.16-.19.22-.33.33-.55.11-.22.05-.41-.03-.57-.08-.16-.74-1.78-1.01-2.44-.27-.64-.54-.55-.74-.56h-.63c-.22 0-.57.08-.87.41-.3.33-1.14 1.11-1.14 2.71s1.17 3.15 1.33 3.37c.16.22 2.31 3.52 5.6 4.94.78.34 1.39.54 1.87.69.79.25 1.5.21 2.06.13.63-.09 1.95-.8 2.23-1.57.27-.77.27-1.43.19-1.57-.08-.14-.3-.22-.63-.38Z"/>
+        </svg>
       </a>
     </div>
   );
@@ -299,6 +311,15 @@ function Home({ slide, setSlide, activitySlide, setActivitySlide, goTo }) {
           backgroundImage: `linear-gradient(rgba(38, 19, 7, 0.38), rgba(38, 19, 7, 0.62)), url(${heroSlides[slide].image})`,
         }}
       >
+        <div className="heroAnimatedBg">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
         <div className="heroGlass reveal show">
           <p className="smallTitle">{heroSlides[slide].badge}</p>
           <h1>{heroSlides[slide].title}</h1>
@@ -656,10 +677,11 @@ function Staff({ name, title, image }) {
   );
 }
 
-function Facility({ title, text, icon }) {
+function Facility({ title, text, icon, image }) {
   return (
-    <div className="facilityCard iconOnlyCard">
-      <div className="bigCardIcon">{icon}</div>
+    <div className="facilityCard imageCard facilityPhotoCard">
+      <img src={image} alt={title} />
+      <div className="cardIcon">{icon}</div>
       <h3>{title}</h3>
       <p>{text}</p>
     </div>
