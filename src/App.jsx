@@ -32,6 +32,10 @@ import facility2 from "./assets/facility2.jpg";
 import facility3 from "./assets/facility3.jpg";
 import facility4 from "./assets/facility4.jpg";
 
+/* MANEB results images */
+import maneb2024 from "./assets/maneb2024.jpg";
+import maneb2025 from "./assets/maneb2025.jpg";
+
 const mainPhone = "0999743710";
 const hostelPhone = "0888532878";
 const whatsappNumber = "265999743710";
@@ -180,10 +184,26 @@ const activitySlides = [
   },
 ];
 
+const manebResults = [
+  {
+    year: "2024 MANEB Results",
+    title: "Excellent MANEB Performance 2024",
+    text: "View the 2024 MANEB results and selection performance for Little Stars Academy.",
+    image: maneb2024,
+  },
+  {
+    year: "2025 MANEB Results",
+    title: "Excellent MANEB Performance 2025",
+    text: "View the 2025 MANEB results and selection performance for Little Stars Academy.",
+    image: maneb2025,
+  },
+];
+
 function App() {
   const [page, setPage] = useState("home");
   const [slide, setSlide] = useState(0);
   const [activitySlide, setActivitySlide] = useState(0);
+  const [selectedResult, setSelectedResult] = useState(manebResults[0]);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -233,6 +253,8 @@ function App() {
           setSlide={setSlide}
           activitySlide={activitySlide}
           setActivitySlide={setActivitySlide}
+          selectedResult={selectedResult}
+          setSelectedResult={setSelectedResult}
           goTo={goTo}
         />
       )}
@@ -240,6 +262,7 @@ function App() {
       {page === "programs" && <Programs />}
       {page === "admissions" && <Admissions />}
       {page === "campuses" && <Campuses />}
+      {page === "results" && <Results selectedResult={selectedResult} setSelectedResult={setSelectedResult} />}
       {page === "contact" && <Contact />}
 
       <Footer goTo={goTo} />
@@ -266,6 +289,7 @@ function Header({ goTo, page, menuOpen, setMenuOpen }) {
     ["programs", "Programs"],
     ["admissions", "Admissions"],
     ["campuses", "Campuses"],
+    ["results", "MANEB Results"],
     ["contact", "Contact"],
   ];
 
@@ -302,7 +326,7 @@ function Header({ goTo, page, menuOpen, setMenuOpen }) {
   );
 }
 
-function Home({ slide, setSlide, activitySlide, setActivitySlide, goTo }) {
+function Home({ slide, setSlide, activitySlide, setActivitySlide, selectedResult, setSelectedResult, goTo }) {
   return (
     <>
       <section
@@ -423,6 +447,32 @@ function Home({ slide, setSlide, activitySlide, setActivitySlide, goTo }) {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section compactSection reveal">
+        <p className="label center">MANEB Results</p>
+        <h2 className="centerTitle">Outstanding Selection Performance</h2>
+
+        <div className="manebHomeGrid">
+          {manebResults.map((result) => (
+            <div
+              className="manebCard"
+              key={result.year}
+              onClick={() => {
+                setSelectedResult(result);
+                goTo("results");
+              }}
+            >
+              <img src={result.image} alt={result.year} />
+              <div>
+                <span>{result.year}</span>
+                <h3>{result.title}</h3>
+                <p>{result.text}</p>
+                <button>View Results</button>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -583,6 +633,52 @@ function Campuses() {
         {campuses.map((campus) => (
           <CampusCard key={campus.name} {...campus} />
         ))}
+      </div>
+    </section>
+  );
+}
+
+function Results({ selectedResult, setSelectedResult }) {
+  return (
+    <section className="page">
+      <PageHero title="MANEB Results" image={selectedResult.image} />
+
+      <div className="resultsPageWrap reveal">
+        <div className="resultsIntro">
+          <p className="label">Academic Excellence</p>
+          <h2>MANEB Selection Results Showcase</h2>
+          <p>
+            Little Stars Academy celebrates strong MANEB performance and selection success.
+            Tap a year below to view the results image clearly.
+          </p>
+        </div>
+
+        <div className="resultsTabs">
+          {manebResults.map((result) => (
+            <button
+              key={result.year}
+              className={selectedResult.year === result.year ? "activeResultTab" : ""}
+              onClick={() => setSelectedResult(result)}
+            >
+              {result.year}
+            </button>
+          ))}
+        </div>
+
+        <div className="resultViewer">
+          <div className="resultDetails">
+            <p className="label">{selectedResult.year}</p>
+            <h2>{selectedResult.title}</h2>
+            <p>{selectedResult.text}</p>
+            <a href={selectedResult.image} target="_blank" rel="noreferrer">
+              Open Full Image
+            </a>
+          </div>
+
+          <div className="resultImageBox">
+            <img src={selectedResult.image} alt={selectedResult.year} />
+          </div>
+        </div>
       </div>
     </section>
   );
